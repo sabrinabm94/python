@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'GANDALF'
+__author__ = 'Sabrina'
 
 #instanciar a classe: criar
 #classe: definine o tipo de um objeto e suas características gerais

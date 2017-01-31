@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'GANDALF'
+__author__ = 'Sabrina'
 
 #métodos para textos
 texto = open('arquivo.txt', 'a')

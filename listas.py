@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'GANDALF'
+__author__ = 'Sabrina'
 contador = 0
 
 lista = ['Axel', 'Liv', 'Kraus', 'Stefan']
