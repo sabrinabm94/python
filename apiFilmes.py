@@ -1,8 +1,10 @@
 __author__ = 'Sabrina'
 # -*- coding: utf-8 -*-
 import requests
+#instalar requests usando pip: pip install requests
+#upgrade: pip install requests --upgrade
 import json
-#importar a biblioteca json para tranformar seu conteúdo num dicionário.;
+#importar a biblioteca json
 
 request = None;
 title = 'Game of Thrones';
