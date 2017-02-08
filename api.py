@@ -16,8 +16,7 @@ except:
     #return None
     exit()
 
-returRequest = print(request.text)
-returDicionary = json.loads(returRequest)
+returDicionary = json.loads(request.text)
 
 search = input('Digite um dos seguintes termos para buscar: Title, Director, Genre, Actors, Year ou full para ver tudo')
 if search == 'full':
@@ -27,4 +26,9 @@ if search == 'full':
     print('Diretor', returDicionary['Director'])
     print('Atores', returDicionary['Actors'])
 else:
-    print(returDicionary(search))
+    try:
+        if search == 'Title' or 'Year' or 'Genre' or 'Actors':
+            print(search, ' ',(returDicionary[search]))
+    except:
+        print('Desculpe, o termo não encontrado.')
+
