@@ -5,17 +5,17 @@ __author__ = 'Sabrina'
 #classe: definine o tipo de um objeto e suas características gerais
 #métodos: são ações dos objetos.
 
-class veiculo:
-    def __init__(self, cor, rodas, marca, tanque): #parâmetros da classe
+class unicorn:
+    def __init__(self, color, age, name, subjects): #parâmetros da classe
     #método inicial para ele mesmo (self), semelhante ao this do Java, é o método construtor de objetos.
-        self.cor = cor
-        self.rodas = rodas
-        self.marca = marca
-        self.tanque = tanque
+        self.color = color
+        self.age = age
+        self.name = name
+        self.subjects = subjects
 
-    def abastecer(self, litros):
+    def addSubject(self, newSubject):
         #método abastecer
-        self.tanque += litros
+        self.subjects += newSubject
 
 
 
