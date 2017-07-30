@@ -8,10 +8,10 @@ __author__ = 'Sabrina'
 class unicorn:
     def __init__(self, color, age, name, subjects): #parâmetros da classe
     #método inicial para ele mesmo (self), semelhante ao this do Java, é o método construtor de objetos.
-        self.color = color
-        self.age = age
-        self.name = name
-        self.subjects = subjects
+    self.color = color
+    self.age = age
+    self.name = name
+    self.subjects = subjects
 
     def addSubject(self, newSubject):
         #método abastecer

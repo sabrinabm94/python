@@ -5,5 +5,5 @@ from classes class import unicorn
 class unicorn
 
 class king(unicorn):
-    def __init__(self, color, age, name, subjects):
-        king.__init__(self, color, age, name, subjects)
+	def __init__(self, color, age, name, subjects):
+		king.__init__(self, color, age, name, subjects)

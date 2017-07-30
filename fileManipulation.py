@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Sabrina'
 
-#métodos para textos
-texto = open('arquivo.txt', 'a')
+#métodos para texts
+text = open('text.txt', 'a')
 #r: modo de leitura, se o arquivo não existir, o programa nao funciona.
 #w: modo de escrita, se o arquivo não existir, ele cria, e se existir, sobescreve.
 #r+: lê e escreve.
 #a: método de escrita no método append, não substituindo o arquivo, e sim adicionado as atualizações no final dele.
 
-novoTexto = input("Digite seu texto")
-texto.write(novoTexto)
+newText = input("Typing your text")
+text.write(newText)
 
-type(print("Tipo do arquivo:", texto))
-print("Nome do arquivo:", texto)
+type(print("File type: ", text))
+print("File name:", text)
 
-print("O novo texto adicionado foi:", novoTexto)
+print("The new text added:", newText)
 
-texto = open('arquivo.txt', 'r')
-print("Conteúdo do arquivo:", texto.read())
+text = open('text.txt', 'r')
+print("File content:", text.read())
 
 
 #métodos para imagem
-imagem = open('imagem.jpg', 'rb')
+image = open('image.jpg', 'rb')
 #b: indicação do arquivo do modo binário
-print(imagem.read())
+print(image.read())
