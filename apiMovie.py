@@ -1,15 +1,14 @@
 __author__ = 'Sabrina'
 # -*- coding: utf-8 -*-
 import requests
-#instalar requests usando pip: pip install requests
+#request installer: pip install requests
 #upgrade: pip install requests --upgrade
 import json
-#importar a biblioteca json
+#import json library
 
 request = None;
 title = 'Game of Thrones';
-#title = input("Digite corretamente o nome que deseja buscar)
-#instanciar a variável antes do try.
+#title = input("Please enter the name you want to search")
 try:
     request = requests.get('http://www.omdbapi.com/?t=' + title)
     #return returRequest
