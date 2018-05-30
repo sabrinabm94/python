@@ -3,13 +3,12 @@ __author__ = 'Sabrina'
 
 import sys
 import time
-#instalar o request: -m pip install requests
+#request instalation: -m pip install requests
 import requests
-#Beatiful soup: pip install bs4
+#Beatiful soup instalation: pip install bs4
 import bs4
-#get pegar informações
-#post envia informações
-#as informações do header não são sempre confiáveis, podendo ser alteradas.
+#get: get data
+#post: send data
 
 siteUrl = input(print("The default site address is: http://putsreq.com/WQ976gYl6AYqIsv9v8VR /n Do you want to change? '1' for yes or '2' for no"))
 if siteUrl == 1:
