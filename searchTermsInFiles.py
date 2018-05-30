@@ -3,23 +3,23 @@ __author__ = 'Sabrina'
 import re
 import time
 
-sair = 'n'
+exit = 'n'
 
 def exit():
-    sair = 'n'
+    exit = 'n'
     time.sleep(2)
-    sair = input(print("\n Do you want to quit ?, type 's' for yes or 'n' to continue"))
+    exit = input(print("\n Do you want to quit ?, type 's' for yes or 'n' to continue"))
 
-    if sair == 's':
+    if exit == 's':
         print('exiting...')
         time.sleep(1)
 
     else:
-        if sair == 'n':
-            print('Programan restart')
+        if exit == 'n':
+            print('Restarting program')
             time.sleep(1)
 
-            while sair == 'n' and sair != 's':
+            while exit == 'n' and exit != 's':
                 try:
                     file = input('Enter the file name and file extension. ex. text.txt \n')
                     fileSelected = open(file, 'r')
@@ -29,10 +29,10 @@ def exit():
                     print('File not found')
                     exit()
 
-                    termo = input('Enter the term to search for in this file:\n')
-                    searchTerm = re.findall(termo + '\w*', fileContent)
-    #searchTerm = re.findall(r'gat\w*', texto)
-    #searchTerm = re.search(padrao, texto)
+                    term = input('Enter the term to search for in this file:\n')
+                    searchTerm = re.findall(term + '\w*', fileContent)
+                    #searchTerm = re.findall(r'fugia\w*', text)
+                    #searchTerm = re.search('fugia\w*', text)
 
     if searchTerm:
         print(print('The following terms were found:'), searchTerm)
@@ -40,14 +40,14 @@ def exit():
         exit()
 
     else:
-        print('Sorry, nothing was found')
+        print('Nothing was found')
         exit()
 
 '''
-o r serve para desconsiderar os caracteres especiais de formatação, e os ler como string.
-o \w considera o padrão e no mínimo mais uma letra aleatória próxima, não apresentando padrões com menos de 4 caracteres.
-o \w+ captura a palavra completa onde se encontrou o padrão.
-o \w* mostra o padrão e as palavras completas que o tem.
+r is used to disregard special formatting characters and consider it like a string.
+\w tge patter is at least one more random next letter, not displaying world with less than 4 characters.
+\w+ captures the full word where the pattern was found.
+\w* shows the pattern and the complete words that have it.
 '''
 
 
