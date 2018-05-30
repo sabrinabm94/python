@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 __author__ = 'Sabrina'
 
-#métodos para texts
+#method to text
 text = open('text.txt', 'a')
-#r: modo de leitura, se o arquivo não existir, o programa nao funciona.
-#w: modo de escrita, se o arquivo não existir, ele cria, e se existir, sobescreve.
-#r+: lê e escreve.
-#a: método de escrita no método append, não substituindo o arquivo, e sim adicionado as atualizações no final dele.
+#r: read mode, if the file does not exist, the program does not work.
+#w: write mode, if the file does not exist, it creates one, and if it exists, overwrite.
+#r +: reads and writes.
+#a: write method in the append method, not replacing the file, but added the updates at the end of it.
 
 newText = input("Typing your text")
 text.write(newText)
@@ -20,7 +20,7 @@ text = open('text.txt', 'r')
 print("File content:", text.read())
 
 
-#métodos para imagem
+#method to image
 image = open('image.jpg', 'rb')
-#b: indicação do arquivo do modo binário
+#b: binary mode file indication
 print(image.read())
