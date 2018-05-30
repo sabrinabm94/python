@@ -4,7 +4,7 @@ import requests
 import json
 import time
 
-#key = input('Digite sua key')
+#key = input('Enter with your key')
 wantLeave = 'n'
 
 def exit():
@@ -22,7 +22,7 @@ def exit():
 
             while wantLeave == 'n' and wantLeave != 's':
                 key = '9213a83088707d804aaa325e91881e5c'
-                city = input('Digite o nome da cidade (letras minísculas e sem acertos):\n')
+                city = input('Enter with the name of your city (Miniscule and without special characters):\n')
                 concatKey = '&appid='+ key
                 concatVariables = city+concatKey
                 try:
