@@ -1,5 +1,17 @@
-Repository used for development in Python, involving courses and various scripts, with the purpose of saving files and accompanying learning.
+# Repository structure
 
-----
+## basic
+Scripts for testing Python features and sintax.
 
-Repositório utilizado para desenvolvimento em java, envolvendo cursos e scripts diversos, com o objetivo de guardar arquivos e acompanhar o aprendizado.
+## object-oriented
+Scripts using the object-oriented pattern for designing projects.
+
+## apis
+Apis projects that provides data and consumes data.
+
+### contacts
+sabrinabgbc
+
+sabrinabgbc@email.com
+
+noobfrontend.wordpress.com
