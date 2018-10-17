@@ -7,7 +7,7 @@ Scripts for testing Python features and sintax.
 Scripts using the object-oriented pattern for designing projects.
 
 ## apis
-Apis projects that provides data and consumes data.
+Apis projects that provides and consumes data.
 
 ### contacts
 sabrinabgbc
