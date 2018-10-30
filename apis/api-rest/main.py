@@ -1,12 +1,20 @@
-#importar o framework flask
-from flask import Flask, jsonify, request
+#importar o frameworks do flask
+from flask import Flask, jsonify, request, redirect
 from client import Client
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from flask_swag import Swag
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://172.18.0.35:27017/DBsabrina"
 mongo = PyMongo(app)
+swag = Swag(app)
+app.config['SWAG_TITLE'] = "API CLIENTES"
+app.config['SWAG_API_VERSION'] = "1.0"
+
+@app.route('/')
+def index():
+    return redirect("/swagger/ui")
 
 #listClients = [
 #    Client(name="Sabrina", email="sabrinabgbc@email.com", phone="5547000000000"),
@@ -14,7 +22,12 @@ mongo = PyMongo(app)
 #]
 
 @app.route('/api/v1.0/clients', methods=['GET'])
-def get_tasks():
+
+#documentação da api via swager
+@swag.mark.summary("objetivo deste metodo é retornar uma lista de clientes")
+@swag.mark.response(201, "Lista de Usuários")
+
+def get_client():
     clients = []
     for client in mongo.db.clients.find():
         newClient = Client()
@@ -26,6 +39,10 @@ def get_tasks():
     return jsonify({'clients': [client.__dict__ for client in clients]}), 201
 
 @app.route('/api/v1.0/clients', methods=['POST'])
+@swag.mark.simple_param('body', 'Client object', str)
+@swag.mark.response(201, "Retorn_Id document")
+@swag.mark.response(500, "Internal error")
+
 def create_client():
     newcli = Client()
     newcli._id = ObjectId()
@@ -37,6 +54,7 @@ def create_client():
     return jsonify({'id': str(ret)}), 201
 
 @app.route('/api/v1.0/clients/<string:_id>', methods=['PUT'])
+#cria documentação socinha pois já informamos o que seria buscado pela declaração da rota
 def update_client(_id):
     updatecli = Client()
     updatecli._id = ObjectId(_id)
@@ -59,3 +77,4 @@ if __name__ == '__main__':
 #acesso padrão: http://localhost:5000/api
 #acesso modificado: http://localhost:8080/api
 #acesso versionado: http://localhost:8080/api/v1.0/clients
+#acesso ao swagger: http://localhost:8080/swagger/ui/
