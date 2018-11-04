@@ -9,7 +9,9 @@ Scripts using the object-oriented pattern for designing projects.
 ## apis
 Apis projects that provides and consumes data.
 
-### contacts
+---
+
+# Contacts
 sabrinabgbc
 
 sabrinabgbc@email.com
