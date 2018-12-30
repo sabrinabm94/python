@@ -1,4 +1,4 @@
-# Repository structure
+# repository structure
 
 ## basic
 Scripts for testing Python features and sintax.
@@ -11,9 +11,11 @@ Apis projects that provides and consumes data.
 
 ---
 
-# Contacts
+# contacts
 sabrinabgbc
 
-sabrinabgbc@email.com
+sabrinabgbc@email.com | sabrinabmoreira@gmail.com
 
 noobfrontend.wordpress.com
+
+www.linkedin.com/in/sabrinabmoreira
