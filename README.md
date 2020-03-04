@@ -1,20 +1,19 @@
-# repository structure
+# Repository structure
 
-## basic
+## Basic
 Scripts for testing Python features and sintax.
 
-## object-oriented
+## Object Oriented
 Scripts using the object-oriented pattern for designing projects.
 
-## apis
+## Apis
 Apis projects that provides and consumes data.
 
 ---
 
-# contacts
-Sivy
+# Contacts
+Sabrina B.
 
-sivyboing@gmail.com
+sabrinabmoreira@gmail.com
 
-www.thedevblog.com.br
-
+https://www.thedevblog.com.br/
