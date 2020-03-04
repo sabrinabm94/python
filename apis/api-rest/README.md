@@ -1,9 +1,9 @@
 # Description
 Api rest created with Flask.
 
-### contacts
-sabrinabgbc
+# Contacts
+Sabrina B.
 
-sabrinabgbc@email.com
+sabrinabmoreira@gmail.com
 
-noobfrontend.wordpress.com
+https://www.thedevblog.com.br/
