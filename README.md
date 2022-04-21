@@ -11,9 +11,6 @@ Apis projects that provides and consumes data.
 
 ---
 
-# Contacts
+# Contact
 Sabrina B.
-
-sabrinabmoreira@gmail.com
-
-https://www.thedevblog.com.br/
+sabrinabm94@gmail.com
