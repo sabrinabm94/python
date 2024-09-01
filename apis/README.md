@@ -5,10 +5,11 @@ Api rest created with Flask.
 pip install flask
 pip install requests
 pip install jsonify
+pip install PyMongo
+pip install ObjectId
+pip install Swag
 
 # Contacts
 Sabrina B.
 
-sabrinabmoreira@gmail.com
-
-https://www.thedevblog.com.br/
+sabrinabm94@gmail.com

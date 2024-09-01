@@ -1,4 +1,4 @@
-#importar o frameworks do flask
+#importar o framework do flask
 from flask import Flask, jsonify, request, redirect
 from client import Client
 from flask_pymongo import PyMongo
@@ -54,7 +54,7 @@ def create_client():
     return jsonify({'id': str(ret)}), 201
 
 @app.route('/api/v1.0/clients/<string:_id>', methods=['PUT'])
-#cria documentação socinha pois já informamos o que seria buscado pela declaração da rota
+#cria documentação sozinha pois já informamos o que seria buscado pela declaração da rota
 def update_client(_id):
     updatecli = Client()
     updatecli._id = ObjectId(_id)

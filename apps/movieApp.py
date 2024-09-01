@@ -6,8 +6,8 @@ import requests
 import json
 #import json library
 
-request = None;
-title = 'Game of Thrones';
+request = None
+title = 'Game of Thrones'
 #title = input("Please enter the name you want to search")
 try:
     request = requests.get('http://www.omdbapi.com/?t=' + title)
