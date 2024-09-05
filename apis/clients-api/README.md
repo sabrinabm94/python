@@ -98,7 +98,10 @@ To test the requests, install [Insomnia](https://insomnia.rest/download).
 
 Import the `Insomnia-requests-api-clients.json` file into Insomnia and test the available requests.
 
-## Contacts
+---
 
-Sabrina B.  
-Email: <sabrinabm94@gmail.com>
+# Contact
+
+Sabrina B.
+See my profile [here](https://github.com/sabrinabm94/about/blob/main/README.md)
+<sabrinabm94@gmail.com>
