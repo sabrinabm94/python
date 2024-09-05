@@ -1,8 +1,7 @@
-import flask, json, jsonify
-import datetime
-import requests
+from flask import Flask
+import json
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = True
 
 # Create some test data for our catalog in the form of a list of dictionaries.

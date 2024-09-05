@@ -1,0 +1,7 @@
+Flask==2.0.2
+flask_pymongo==2.3.0
+bson==0.5.10
+flasgger==0.28.4
+requests==2.26.0
+jsonlib-python3==1.6.1
+werkzeug==2.1.5
