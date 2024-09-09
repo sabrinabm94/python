@@ -1,37 +1,34 @@
-#Numbers
+# Numbers
 
-#Int
-positive_number = 1
-print("positive_number: ", positive_number)
+# Int
+POSITIVE_NUMBER = 1
+print("POSITIVE_NUMBER: ", POSITIVE_NUMBER)
 
-negative_number = -100
-print("negative_number: ", negative_number)
+NEGATIVE_NUMBER = -100
+print("NEGATIVE_NUMBER: ", NEGATIVE_NUMBER)
 
-sum_values = negative_number + positive_number
+sum_values = NEGATIVE_NUMBER + POSITIVE_NUMBER
 print("sum_values: ", sum_values)
 
-#Float
-float_number = 33.3
-print("float_number: ", float_number)
+# Float
+FLOAT_NUMBER = 33.3
+print("FLOAT_NUMBER: ", FLOAT_NUMBER)
 
-#Boolean
-true_value = True
-print("true_value: ", true_value)
+# Boolean
+TRUE_VALUE = True
+print("TRUE_VALUE: ", TRUE_VALUE)
 
-false_value = False
-print("false_value: ", false_value)
+FALSE_VALUE = False
+print("FALSE_VALUE: ", FALSE_VALUE)
 
-#String
-string_value = "Olá, mundo"
-print("string_value: ", string_value)
+# String
+STRING_VALUE = "Olá, mundo"
+print("STRING_VALUE: ", STRING_VALUE)
 
-#String empty
-empty_value = ""
-print("empty_value: ", empty_value)
+# String empty
+EMPTY_VALUE = ""
+print("EMPTY_VALUE : ", EMPTY_VALUE)
 
-#Value None
-null_value = None
-print("null_value: ", null_value)
-
-
-    
+# Value None
+NULL_VALUE = None
+print("NULL_VALUE: ", NULL_VALUE)

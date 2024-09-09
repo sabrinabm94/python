@@ -1,20 +1,32 @@
-#verify if 2 values had same memory location
-course_name = "Python bootcamp"
-course_title = course_name
-some_value = 46
-another_value = 45
-result_value = another_value + 1
+# verify if 2 values had same memory location
+COURSE_NAME = "Python bootcamp"
+COURSE_TITLE = COURSE_NAME
+SOME_VALUE = 46
+ANOTHER_VALUE = 45
+RESULT_VALUE = ANOTHER_VALUE + 1
 
-#IS
-print(f"course_title {course_title} is some_value {some_value}: ", course_title is some_value)
-#false
+# IS
+print(
+    f"COURSE_TITLE {COURSE_TITLE} is SOME_VALUE {SOME_VALUE}: ",
+    COURSE_TITLE is SOME_VALUE,
+)
+# false
 
-print(f"some_value {some_value} is result_value {result_value}: ", some_value is result_value)
-#false
+print(
+    f"SOME_VALUE {SOME_VALUE} is RESULT_VALUE {RESULT_VALUE}: ",
+    SOME_VALUE is RESULT_VALUE,
+)
+# false
 
-print(f"course_name {course_name} is course_title {course_title}: ", course_name is course_title)
-#true
+print(
+    f"COURSE_NAME {COURSE_NAME} is COURSE_TITLE {COURSE_TITLE}: ",
+    COURSE_NAME is COURSE_TITLE,
+)
+# true
 
-#IS NOT
-print(f"course_name {course_name} is NOT course_title {course_title}: ", course_name is not course_title)
-#false
+# IS NOT
+print(
+    f"COURSE_NAME {COURSE_NAME} is NOT COURSE_TITLE {COURSE_TITLE}: ",
+    COURSE_NAME is not COURSE_TITLE,
+)
+# false

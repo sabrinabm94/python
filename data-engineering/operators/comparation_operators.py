@@ -1,24 +1,20 @@
-balance = 450
-withdrawal = 200
+BALANCE = 450
+WITHDRAWAL = 200
 
-print(f"Balance {balance} == withdrawl {withdrawal}? ", balance == withdrawal)
-#false
+print(f"BALANCE {BALANCE} == withdrawl {WITHDRAWAL}? ", BALANCE == WITHDRAWAL)
+# false
 
-print(f"Balance {balance} != withdrawl {withdrawal}? ", balance != withdrawal)
-#true
+print(f"BALANCE {BALANCE} != withdrawl {WITHDRAWAL}? ", BALANCE != WITHDRAWAL)
+# true
 
-print(f"Balance {balance} > withdrawl {withdrawal}? ", balance > withdrawal)
-#true
+print(f"BALANCE {BALANCE} > withdrawl {WITHDRAWAL}? ", BALANCE > WITHDRAWAL)
+# true
 
-print(f"Balance {balance} >= withdrawl {withdrawal}? ", balance >= withdrawal)
-#true
+print(f"BALANCE {BALANCE} >= withdrawl {WITHDRAWAL}? ", BALANCE >= WITHDRAWAL)
+# true
 
-print(f"Balance {balance} < withdrawl {withdrawal}? ", balance < withdrawal)
-#false
+print(f"BALANCE {BALANCE} < withdrawl {WITHDRAWAL}? ", BALANCE < WITHDRAWAL)
+# false
 
-print(f"Balance {balance} <= withdrawl {withdrawal}? ", balance <= withdrawal)
-#false
-
-
-
-
+print(f"BALANCE {BALANCE} <= withdrawl {WITHDRAWAL}? ", BALANCE <= WITHDRAWAL)
+# false

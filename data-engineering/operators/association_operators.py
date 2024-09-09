@@ -1,14 +1,13 @@
+COURSE_NAME = "Python bootcamp"
+FRUITS = ["banana", "apple", "raspberry", "blueberry", "redberry"]
 
-course_name = "Python bootcamp"
-fruits = ["banana", "apple", "raspberry", "blueberry", "redberry"]
+# IN
+print(f"Python in COURSE_NAME {COURSE_NAME}: ", "Python" in COURSE_NAME)
+# true
 
-#IN
-print(f"Python in course_name {course_name}: ", "Python" in course_name)
-#true
+print(f"PYTHON in COURSE_NAME {COURSE_NAME}: ", "PYTHON" in COURSE_NAME)
+# false (is case sensitive)
 
-print(f"PYTHON in course_name {course_name}: ", "PYTHON" in course_name)
-#false (is case sensitive)
-
-#NOT IN
-print(f"blueberry not in fruits {fruits}: ", "blueberry" not in fruits)
-#false
+# NOT IN
+print(f"blueberry not in FRUITS {FRUITS}: ", "blueberry" not in FRUITS)
+# false

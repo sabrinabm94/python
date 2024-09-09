@@ -1,17 +1,17 @@
-#int to float
-int_number = 10.50
-number_int_to_float = float(int_number)
-print("The int value: ", int_number, " float value: ", number_int_to_float)
+# int para float
+INT_NUMBER = 10.50
+number_int_to_float = float(INT_NUMBER)
+print("The int value: ", INT_NUMBER, " float value: ", number_int_to_float)
 
-#int to string
-#convertion by function
-number_int_to_string = str(int_number)
-print("The int value: ", int_number, " string value: ", number_int_to_string)
+# int para  string
+# Conversão por função
+NUMBER_INT_TO_STRING = str(INT_NUMBER)
+print("The int value: ", INT_NUMBER, " string value: ", NUMBER_INT_TO_STRING)
 
 
-#convertion by string and variable concatenation
-print(f"The int value: {int_number}")
+# Conversão por string e concatenação de variáveis
+print(f"The int value: {INT_NUMBER}")
 
-#convertion string to int
+# string to int
 print("The int value to string:", int("100"))
 print("The type of value:", type(int("100")))
