@@ -2,7 +2,19 @@ balance_value = 3300
 option = -1
 
 while option != 4:
-    option = int(input("[1] Sacar \n[2] Extrato \n[3] Cancelar \n[4] Sair \n:"))
+    option = int(
+        input(
+            """
+            Seja bem vindo!
+        Selecione uma opção para continuar:
+                [1] Sacar
+                [2] Extrato
+                [3] Cancelar
+                [4] Sair
+        Obrigado por usar nosso sistema.
+    """
+        )
+    )
     if option == 1:
         print(f"Você tem {balance_value} na sua conta")
         withdrawal_value = float(input("Informe o valor de saque:"))
