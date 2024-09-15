@@ -67,9 +67,11 @@ def withdrawal_value(
 
 def balance_show(balance_value):
     print("\nOpção EXTRATO selecionada...")
+    print("###########Extrato de conta###########")
     show_balance_value(balance_value)
     show_withdrawal_in_day_number(withdrawal_in_day_number, withdrawal_per_day_limit)
     show_deposite_in_day_number(deposite_in_day_number)
+    print("######################################")
 
 
 def show_balance_value(balance_value):
