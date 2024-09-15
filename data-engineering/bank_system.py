@@ -65,7 +65,12 @@ def withdrawal_value(
     return balance_value, withdrawal_in_day_number
 
 
-def balance_show(balance_value):
+def balance_show(
+    balance_value,
+    withdrawal_in_day_number,
+    withdrawal_per_day_limit,
+    deposite_in_day_number,
+):
     print("\nOpção EXTRATO selecionada...")
     print("###########Extrato de conta###########")
     show_balance_value(balance_value)
@@ -79,13 +84,18 @@ def show_balance_value(balance_value):
 
 
 def show_withdrawal_in_day_number(withdrawal_in_day_number, withdrawal_per_day_limit):
-    print(
-        f"Saques realizados no dia: {withdrawal_in_day_number}/{withdrawal_per_day_limit} "
-    )
+    if withdrawal_in_day_number > 0:
+        print(
+            f"Saques realizados no dia: {withdrawal_in_day_number}/{withdrawal_per_day_limit} "
+        )
+        print("Não foram realizados saques até o momento")
 
 
 def show_deposite_in_day_number(deposite_in_day_number):
-    print("Depósitos realizados no dia:", deposite_in_day_number)
+    if deposite_in_day_number > 0:
+        print("Depósitos realizados no dia:", deposite_in_day_number)
+    else:
+        print("Não foram realizados depósitos até o momento")
 
 
 while option != 5:
@@ -103,7 +113,12 @@ while option != 5:
             withdrawal_per_operation_value_limit,
         )
     if option == 3:
-        balance_show(balance_value)
+        balance_show(
+            balance_value,
+            withdrawal_in_day_number,
+            withdrawal_per_day_limit,
+            deposite_in_day_number,
+        )
     if option == 4:
         print("Opção CANCELAR selecionada, cancelando...")
         break
