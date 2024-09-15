@@ -77,6 +77,7 @@ print("Names [3]: ", names[3])
 print("Names [-1]: ", names[-1])
 print("Names [-3]: ", names[-3])
 
+# Sort
 names.sort()
 print("\nNames - sort: ", names)
 
@@ -85,8 +86,23 @@ print("Names - reverse: ", names)
 
 # Função lambda: organizar por tamanho dos valores - ascendente
 names.sort(key=lambda x: len(x))
-print("\nNames - lambda values sizes: ", names)
+print("\nNames - SORT - lambda values sizes: ", names)
 
 # Função lambda: organizar por tamanho dos valores - descendente
 names.sort(key=lambda x: len(x), reverse=True)
-print("Names - lambda values sizes reverse: ", names)
+print("Names - SORTE - lambda values sizes reverse: ", names)
+
+# Sorted
+# Função lambda: retorna a lista ordenada por tamanho dos valores - ascendente
+print("\nnames: ", names)
+print("\nnames - SORTED - lambda values sizes: ", sorted(names, key=lambda x: len(x)))
+
+# Função lambda: retorna a lista ordenada por tamanho dos valores - descendente
+print(
+    "names - SORTED - lambda values sizes reverse: ",
+    sorted(names, key=lambda x: len(x), reverse=True),
+)
+
+# Len
+# Ver tamanho total de elementos de uma lista
+print("coppied_list - len: ", len(coppied_list))
