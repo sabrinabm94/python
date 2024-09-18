@@ -84,3 +84,7 @@ print("remove value 1: ", third_set)
 # Verifica se o valor se encontra no conjunto indicado
 print(f"3 in {third_set}: ", 3.0 in (third_set))
 print(f"100 in {third_set}: ", 100 in (third_set))
+
+# len
+# Verifica a quantidade total de elementos no conjunto
+print(f"len {third_set}: ", len(third_set))
