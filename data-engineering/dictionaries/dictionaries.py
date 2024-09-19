@@ -58,7 +58,26 @@ print("\n cats: ", cats)
 
 # Set default
 # Caso tenha a chave com valor, nada é alterado
-# Caso não tenha a chave informada, adiciona ela com o seu valor
+# Caso não tenha a chave informada, adiciona ela com o seu valor informado
 cats.setdefault("phone", "1234")
 cats.setdefault("name", "sun")
+print("cats: ", cats)
+
+# Update
+cats.update({"phone": {"cellphone: ", "54321"}})
+print("cats: ", cats)
+cats.update({"phone": "54321"})
+print("cats: ", cats)
+
+# Values
+# Retorna somente os valores de um dicionário
+print("\ncats: ", cats.values())
+
+# in
+# Retorna se um valor é encontrado dentro de um dicionário pela sua chave
+print("plays in cats: ", "plays" in cats)
+
+# Del
+# Usado para remover o objeto de um dicionário
+del cats["phone"]
 print("cats: ", cats)
