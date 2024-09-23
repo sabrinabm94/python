@@ -6,3 +6,4 @@ __pycache__
 #packages and enviroments
 env/Lib/*
 env/*
+python/
