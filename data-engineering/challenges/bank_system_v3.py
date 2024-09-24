@@ -72,6 +72,7 @@ def get_account_by_user_cpf(accounts, cpf):
     )
 
 
+# Parametros por posição
 def deposit_transaction(users, user_cpf, accounts):
     user = get_user_by_cpf(users, user_cpf)
 
@@ -118,8 +119,9 @@ def deposit_transaction(users, user_cpf, accounts):
             )
 
 
-def withdrawal_transaction(users, user_cpf, accounts):
-    user = get_user_by_cpf(users, user_cpf)
+# Parametros por palavras chaves
+def withdrawal_transaction(users, cpf, accounts):
+    user = get_user_by_cpf(users, cpf)
 
     if user is None:
         print("Erro: CPF inválido ou não cadastrado.")
@@ -177,8 +179,11 @@ def withdrawal_transaction(users, user_cpf, accounts):
             )
 
 
+# Parametros por posição e palavras chaves
 def show_transaction_history(
-    user_cpf,
+    option,
+    /,
+    cpf,
 ):
     user = get_user_by_cpf(users, user_cpf)
 
@@ -474,14 +479,15 @@ while option != 0:
     elif option == 6:
         user_cpf = input("Informe seu CPF: ")
         if validate_cpf(user_cpf):
-            withdrawal_transaction(users, user_cpf, accounts)
+            withdrawal_transaction(users=users, cpf=user_cpf, accounts=accounts)
         else:
             print("CPF inválido!")
     elif option == 7:
         user_cpf = input("Informe seu CPF: ")
         if validate_cpf(user_cpf):
             show_transaction_history(
-                user_cpf,
+                option,
+                cpf=user_cpf,
             )
         else:
             print("CPF inválido!")
