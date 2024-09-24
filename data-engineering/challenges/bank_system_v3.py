@@ -11,213 +11,206 @@ option = -1
 transactions_history = ""
 account_agency = str("0001")
 account_number_prefix = 0
-accounts = []
+accounts = [
+    {
+        "cpf": "12345678900",
+        "agency": "0001",
+        "number": "0687576467476",
+        "balance_value": balance_value,
+        "withdrawal_transaction_per_day_limit_number": withdrawal_transaction_per_day_limit_number,
+        "transactions_per_day_limit": transactions_per_day_limit,
+        "transactions_in_day_number": transactions_in_day_number,
+        "withdrawal_transaction_in_day_number": withdrawal_transaction_in_day_number,
+        "deposit_in_day_number": deposit_in_day_number,
+        "transactions_history": transactions_history,
+    },
+    {
+        "cpf": "98765432100",
+        "agency": "0001",
+        "number": "98765432100",
+        "balance_value": balance_value,
+        "withdrawal_transaction_per_day_limit_number": withdrawal_transaction_per_day_limit_number,
+        "transactions_per_day_limit": transactions_per_day_limit,
+        "transactions_in_day_number": transactions_in_day_number,
+        "withdrawal_transaction_in_day_number": withdrawal_transaction_in_day_number,
+        "deposit_in_day_number": deposit_in_day_number,
+        "transactions_history": transactions_history,
+    },
+]
 users = [
     {
         "name": "Cassandra Souza",
         "birtdate": "15/05/1990",
         "cpf": "12345678900",
         "adress": "Rua das Flores, 123 - Centro - Florianópolis/SC",
+        "accounts": ["0687576467476"],
     },
     {
         "name": "Nicolas Ferreira",
         "birtdate": "02/08/1985",
         "cpf": "98765432100",
         "adress": "Av. Paulista, 1000 - Bela Vista - São Paulo/SP",
+        "accounts": ["98765432100"],
     },
 ]
 
 
-def deposit_transaction_value(
-    balance_value,
-    deposit_in_day_number,
-    transactions_in_day_number,
-    transactions_per_day_limit,
-    transactions_history,
-    user_cpf,
-):
-    print("\nOpção DEPÓSITO selecionada...")
-    show_transaction_history_value(balance_value)
-    transaction_date_time = datetime.now()
-    is_transaction_allowed = transactions_in_day_limit_verify(
-        transaction_date_time, transactions_per_day_limit, transactions_in_day_number
+def validate_cpf(cpf):
+    if len(cpf) == 11 and cpf.isdigit():
+        return True
+    return False
+
+
+def get_user_by_cpf(users, cpf):
+    return next((user for user in users if str(user["cpf"]) == str(cpf)), None)
+
+
+def get_account_by_user_cpf(accounts, cpf):
+    return next(
+        (account for account in accounts if str(account["cpf"]) == str(cpf)),
+        None,
     )
-    if is_transaction_allowed is True:
-        deposit_transaction_value = float(input("Informe o valor de depósito:"))
-        if deposit_transaction_value > 0:
-            balance_value += deposit_transaction_value
-            deposit_in_day_number += 1
-            transactions_in_day_number += 1
-            transactions_history = update_transactions_history(
-                transactions_history,
+
+
+def deposit_transaction(users, user_cpf, accounts):
+    user = get_user_by_cpf(users, user_cpf)
+
+    print(user)
+    if user is None:
+        print("Erro: CPF inválido ou não cadastrado.")
+        return
+    else:
+        account = get_account_by_user_cpf(accounts, user["cpf"])
+
+        if account:
+            print("\nOpção DEPÓSITO selecionada...")
+            show_transaction_history_value(account["balance_value"])
+            transaction_date_time = datetime.now()
+            is_transaction_allowed = transactions_in_day_limit_verify(
                 transaction_date_time,
-                deposit_transaction_value,
-                "depositado",
-                user_cpf,  # Registrando CPF no histórico
+                account["transactions_per_day_limit"],
+                account["transactions_in_day_number"],
             )
-            show_transaction_confirmation_message(
-                deposit_transaction_value, "depositado"
+            if is_transaction_allowed:
+                deposit_transaction_value = float(input("Informe o valor de depósito:"))
+                if deposit_transaction_value > 0:
+                    account["balance_value"] += deposit_transaction_value
+                    account["deposit_in_day_number"] += 1
+                    account["transactions_in_day_number"] += 1
+                    account["transactions_history"] = update_transactions_history(
+                        account["transactions_history"],
+                        transaction_date_time,
+                        deposit_transaction_value,
+                        "depositado",
+                    )
+                    show_transaction_confirmation_message(
+                        deposit_transaction_value, "depositado"
+                    )
+                    print(
+                        "Depósitos realizados no dia:", account["deposit_in_day_number"]
+                    )
+                    show_transaction_history_value(account["balance_value"])
+                else:
+                    print("Valor de depósito inválido!")
+            show_transactions_in_day_number(
+                account["transactions_in_day_number"],
+                account["transactions_per_day_limit"],
             )
-            print("Depósitos realizados no dia:", deposit_in_day_number)
-            show_transaction_history_value(balance_value)
-
-        else:
-            print("Valor de depósito inválido!")
-
-    show_transactions_in_day_number(
-        transactions_in_day_number, transactions_per_day_limit
-    )
-    return (
-        balance_value,
-        deposit_in_day_number,
-        transactions_in_day_number,
-        transactions_history,
-    )
 
 
-def withdrawal_transaction_value(
-    balance_value,
-    withdrawal_transaction_per_day_limit_number,
-    withdrawal_transaction_in_day_number,
-    withdrawal_per_operation_limit_value,
-    transactions_in_day_number,
-    transactions_history,
-    user_cpf,
-):
-    print("\nOpção SAQUE selecionada...")
-    show_transaction_history_value(balance_value)
-    transaction_date_time = datetime.now()
-    is_transaction_allowed = transactions_in_day_limit_verify(
-        transaction_date_time, transactions_per_day_limit, transactions_in_day_number
-    )
-    is_withdrawal_transaction_allowed = withdrawal_transactions_in_day_limit_verify(
-        transaction_date_time,
-        withdrawal_transaction_per_day_limit_number,
-        withdrawal_transaction_in_day_number,
-    )
-    if is_transaction_allowed is True:
-        if is_withdrawal_transaction_allowed is True:
-            withdrawal_transaction_value = float(input("Informe o valor de saque:"))
-            is_withdrawal_transaction_value_valid = withdrawal_value_verify(
-                withdrawal_transaction_value,
-                withdrawal_per_operation_limit_value,
-                balance_value,
+def withdrawal_transaction(users, user_cpf, accounts):
+    user = get_user_by_cpf(users, user_cpf)
+
+    if user is None:
+        print("Erro: CPF inválido ou não cadastrado.")
+        return
+    else:
+        account = get_account_by_user_cpf(accounts, user["cpf"])
+
+        if account:
+            print("\nOpção SAQUE selecionada...")
+            show_transaction_history_value(account["balance_value"])
+            transaction_date_time = datetime.now()
+            is_transaction_allowed = transactions_in_day_limit_verify(
+                transaction_date_time,
+                account["transactions_per_day_limit"],
+                account["transactions_in_day_number"],
             )
-            if is_withdrawal_transaction_value_valid is True:
-                balance_value -= withdrawal_transaction_value
-                withdrawal_transaction_in_day_number += 1
-                transactions_in_day_number += 1
-                transactions_history = update_transactions_history(
-                    transactions_history,
+            is_withdrawal_transaction_allowed = (
+                withdrawal_transactions_in_day_limit_verify(
                     transaction_date_time,
-                    withdrawal_transaction_value,
-                    "sacado",
-                    user_cpf,  # Registrando CPF no histórico
+                    account["withdrawal_transaction_per_day_limit_number"],
+                    account["withdrawal_transaction_in_day_number"],
                 )
-                show_transaction_confirmation_message(
-                    withdrawal_transaction_value, "sacado"
-                )
-                show_withdrawal_transactions_in_day_number(
-                    withdrawal_transaction_in_day_number,
-                    withdrawal_transaction_per_day_limit_number,
-                )
-                show_transaction_history_value(balance_value)
-            else:
-                print(f"Valor de saque de {withdrawal_transaction_value} é inválido!")
-        else:
-            print(
-                f"O limite de {withdrawal_transaction_per_day_limit_number} saques diários foi batido, tente novamente amanhã! "
             )
-
-    show_transactions_in_day_number(
-        transactions_in_day_number, transactions_per_day_limit
-    )
-    return (
-        balance_value,
-        withdrawal_transaction_in_day_number,
-        transactions_in_day_number,
-        transactions_history,
-    )
+            if is_transaction_allowed and is_withdrawal_transaction_allowed:
+                withdrawal_transaction_value = float(input("Informe o valor de saque:"))
+                if withdrawal_value_verify(
+                    withdrawal_transaction_value,
+                    withdrawal_per_operation_limit_value,
+                    account["balance_value"],
+                ):
+                    account["balance_value"] -= withdrawal_transaction_value
+                    account["withdrawal_transaction_in_day_number"] += 1
+                    account["transactions_in_day_number"] += 1
+                    account["transactions_history"] = update_transactions_history(
+                        account["transactions_history"],
+                        transaction_date_time,
+                        withdrawal_transaction_value,
+                        "sacado",
+                    )
+                    show_transaction_confirmation_message(
+                        withdrawal_transaction_value, "sacado"
+                    )
+                    show_withdrawal_transactions_in_day_number(
+                        account["withdrawal_transaction_in_day_number"],
+                        account["withdrawal_transaction_per_day_limit_number"],
+                    )
+                    show_transaction_history_value(account["balance_value"])
+                else:
+                    print(
+                        f"Valor de saque de {withdrawal_transaction_value} é inválido!"
+                    )
+            show_transactions_in_day_number(
+                account["transactions_in_day_number"],
+                account["transactions_per_day_limit"],
+            )
 
 
 def show_transaction_history(
-    balance_value,
-    withdrawal_transaction_in_day_number,
-    withdrawal_transaction_per_day_limit_number,
-    deposit_in_day_number,
-    /,
-    transactions_in_day_number,
-    transactions_history,
     user_cpf,
 ):
-    print("\n\nOpção EXTRATO selecionada...")
-    print("\n########### Extrato de conta ###########\n")
-    print(f"\n CPF: {user_cpf}")
-    show_transaction_history_value(balance_value)
+    user = get_user_by_cpf(users, user_cpf)
 
-    # Somente mostra a quantidade de transações, depósitos e saques se tiverem sido realizadas operações no dia
-    if transactions_in_day_number > 0:
-        show_withdrawal_transactions_in_day_number(
-            withdrawal_transaction_in_day_number,
-            withdrawal_transaction_per_day_limit_number,
-        )
-        show_deposit_transactions_in_day_number(deposit_in_day_number)
-        print(f"\nHistórico de transações: {transactions_history} \n")
-
-    show_transactions_in_day_number(
-        transactions_in_day_number, transactions_per_day_limit
-    )
-    print("########################################\n\n")
-
-
-def update_transactions_history(
-    transactions_history,
-    transaction_date_time,
-    transaction_value,
-    transaction_type_name,
-    user_cpf,
-):
-    transactions_history += f"\nDia: {transaction_date_time.date()} | Hora: {transaction_date_time.time()} | CPF: {user_cpf} | O valor de R$ {transaction_value} foi {transaction_type_name}."
-    return transactions_history
-
-
-def show_menu():
-    return """\n\nSeja bem vindo!
-    Selecione uma opção para continuar:
-            [1] Cadastrar usuário
-            [2] Listar usuários
-            [3] Cadastrar conta bancária
-            [4] Listar contas bancárias
-            [5] Depósito
-            [6] Saque
-            [7] Extrato
-            [8] Cancelar
-    \n\n
-    """
-
-
-def show_transaction_history_value(balance_value):
-    print("Seu valor total na conta é: R$", balance_value)
-
-
-def show_withdrawal_transactions_in_day_number(
-    withdrawal_transaction_in_day_number, withdrawal_transaction_per_day_limit_number
-):
-    if withdrawal_transaction_in_day_number > 0:
-        print(
-            f"Saques realizados no dia: {withdrawal_transaction_in_day_number}/{withdrawal_transaction_per_day_limit_number} "
-        )
+    if user is None:
+        print("Erro: CPF inválido ou não cadastrado.")
+        return
     else:
-        print("Não foram realizados saques no dia de hoje")
+        account = get_account_by_user_cpf(accounts, user["cpf"])
 
+        if account:
+            print("\n\nOpção EXTRATO selecionada...")
+            print("\n########### Extrato de conta ###########\n")
+            print(f"CPF: {user["cpf"]}")
+            show_transaction_history_value(account["balance_value"])
 
-def show_deposit_transactions_in_day_number(deposit_in_day_number):
-    if deposit_in_day_number > 0:
-        print("Depósitos realizados no dia:", deposit_in_day_number)
-    else:
-        print("Não foram realizados depósitos no dia de hoje")
+            if account["transactions_in_day_number"] > 0:
+                show_withdrawal_transactions_in_day_number(
+                    account["withdrawal_transaction_in_day_number"],
+                    account["withdrawal_transaction_per_day_limit_number"],
+                )
+                show_deposit_transactions_in_day_number(
+                    account["deposit_in_day_number"]
+                )
+                print(
+                    f"\nHistórico de transações: {account["transactions_history"]} \n"
+                )
 
-    return deposit_in_day_number
+            show_transactions_in_day_number(
+                account["transactions_in_day_number"],
+                account["transactions_per_day_limit"],
+            )
+            print("\n########################################\n")
 
 
 def show_transactions_in_day_number(
@@ -238,6 +231,10 @@ def show_transactions_in_day_number(
     return transactions_in_day_number
 
 
+def show_transaction_history_value(balance_value):
+    print("Seu valor total na conta é: R$", balance_value)
+
+
 def get_date_now():
     date_time_now = datetime.now()
     if date_time_now:
@@ -250,19 +247,55 @@ def show_date_now(date_time_now):
         return date_time_now
 
 
-def withdrawal_value_verify(
-    withdrawal_transaction_value,
-    withdrawal_per_operation_limit_value,
-    balance_value,
+def transactions_in_day_limit_verify(
+    transaction_date_time, transactions_per_day_limit, transactions_in_day_number
 ):
-    if (
-        withdrawal_transaction_value > 0
-        and withdrawal_transaction_value <= balance_value
-        and withdrawal_transaction_value <= withdrawal_per_operation_limit_value
-    ):
-        return True
+    today = get_date_now()
+
+    # Se a data de transação for menor que hoje, é uma transação passada
+    # Se a data de transação for igual a hoje, deve verificar o limite
+    # Se a data de transação é maior que hoje, deve ser parado o código, não é permitido fazer agendamentos
+    if transaction_date_time.date() <= today.date():
+        if transaction_date_time.date() == today.date():
+            # se as transações forem no mesmo dia, verifica o limite
+            if transactions_in_day_number < transactions_per_day_limit:
+                return True
+            else:
+                return False
     else:
+        print("Não é possível realizar agendas de transações, cancelando operação...")
         return False
+
+
+def update_transactions_history(
+    transactions_history,
+    transaction_date_time,
+    transaction_value,
+    transaction_type_name,
+):
+    transactions_history += f"\nDia: {transaction_date_time.date()} | Hora: {transaction_date_time.time()} | O valor de R$ {transaction_value} foi {transaction_type_name}."
+    return transactions_history
+
+
+def show_menu():
+    return """\n\nSeja bem vindo!
+    Selecione uma opção para continuar:
+            [1] Cadastrar usuário
+            [2] Listar usuários
+            [3] Cadastrar conta bancária
+            [4] Listar contas bancárias
+            [5] Depósito
+            [6] Saque
+            [7] Extrato
+            [8] Cancelar
+    \n\n
+    """
+
+
+def show_transaction_confirmation_message(transaction_value, transaction_type_name):
+    return print(
+        f"O valor de {transaction_value} foi {transaction_type_name} com sucesso!"
+    )
 
 
 def withdrawal_transactions_in_day_limit_verify(
@@ -287,24 +320,36 @@ def withdrawal_transactions_in_day_limit_verify(
         return False
 
 
-def transactions_in_day_limit_verify(
-    transaction_date_time, transactions_per_day_limit, transactions_in_day_number
+def show_withdrawal_transactions_in_day_number(
+    withdrawal_transaction_in_day_number, withdrawal_transaction_per_day_limit_number
 ):
-    today = get_date_now()
-
-    # Se a data de transação for menor que hoje, é uma transação passada
-    # Se a data de transação for igual a hoje, deve verificar o limite
-    # Se a data de transação é maior que hoje, deve ser parado o código, não é permitido fazer agendamentos
-    if transaction_date_time.date() <= today.date():
-        if transaction_date_time.date() == today.date():
-            # se as transações forem no mesmo dia, verifica o limite
-            if transactions_in_day_number < transactions_per_day_limit:
-                return True
-            else:
-                return False
+    if withdrawal_transaction_in_day_number > 0:
+        print(
+            f"Saques realizados no dia: {withdrawal_transaction_in_day_number}/{withdrawal_transaction_per_day_limit_number} "
+        )
     else:
-        print("Não é possível realizar agendas de transações, cancelando operação...")
+        print("Não foram realizados saques no dia de hoje")
+
+
+def withdrawal_value_verify(
+    withdrawal_transaction_value,
+    withdrawal_per_operation_limit_value,
+    balance_value,
+):
+    if (
+        withdrawal_transaction_value > 0
+        and withdrawal_transaction_value <= balance_value
+        and withdrawal_transaction_value <= withdrawal_per_operation_limit_value
+    ):
+        return True
+    else:
         return False
+
+
+def print_values(values):
+    if values:
+        for value in values:
+            print(f"\n", value)
 
 
 def user_registry(users):
@@ -337,11 +382,18 @@ def user_registry(users):
     return users
 
 
-def user_verify_cpf(users, cpf):
-    return any(user["cpf"] == cpf for user in users)  # Usando any para simplificar
-
-
-def account_registry(users, accounts, account_number_prefix):
+def account_registry(
+    users,
+    accounts,
+    account_number_prefix,
+    balance_value,
+    withdrawal_transaction_per_day_limit_number,
+    transactions_per_day_limit,
+    transactions_in_day_number,
+    withdrawal_transaction_in_day_number,
+    deposit_in_day_number,
+    transactions_history,
+):
     user_cpf = int(input("Informe o CPF do usuário:"))
 
     user = next((user for user in users if str(user["cpf"]) == str(user_cpf)), None)
@@ -362,6 +414,13 @@ def account_registry(users, accounts, account_number_prefix):
                 cpf=user_cpf,
                 agency=account_agency,
                 number=account_number,
+                balance_value=balance_value,
+                withdrawal_transaction_per_day_limit_number=withdrawal_transaction_per_day_limit_number,
+                transactions_per_day_limit=transactions_per_day_limit,
+                transactions_in_day_number=transactions_in_day_number,
+                withdrawal_transaction_in_day_number=withdrawal_transaction_in_day_number,
+                deposit_in_day_number=deposit_in_day_number,
+                transactions_history=transactions_history,
             )
         )
 
@@ -371,16 +430,17 @@ def account_registry(users, accounts, account_number_prefix):
         return accounts, account_number_prefix
 
 
-def show_transaction_confirmation_message(transaction_value, transaction_type_name):
-    return print(
-        f"O valor de {transaction_value} foi {transaction_type_name} com sucesso!"
-    )
+def user_verify_cpf(users, cpf):
+    return any(user["cpf"] == cpf for user in users)
 
 
-def print_values(values):
-    if values:
-        for value in values:
-            print(f"\n", value)
+def show_deposit_transactions_in_day_number(deposit_in_day_number):
+    if deposit_in_day_number > 0:
+        print("Depósitos realizados no dia:", deposit_in_day_number)
+    else:
+        print("Não foram realizados depósitos no dia de hoje")
+
+    return deposit_in_day_number
 
 
 while option != 0:
@@ -392,52 +452,38 @@ while option != 0:
         print_values(users)
     elif option == 3:
         accounts, account_number_prefix = account_registry(
-            users, accounts, account_number_prefix
+            users,
+            accounts,
+            account_number_prefix,
+            balance_value,
+            withdrawal_transaction_per_day_limit_number,
+            transactions_per_day_limit,
+            transactions_in_day_number,
+            withdrawal_transaction_in_day_number,
+            deposit_in_day_number,
+            transactions_history,
         )
     elif option == 4:
         print_values(accounts)
     elif option == 5:
-        user_cpf = input("Informe seu CPF: ")  # Adicionando captura do CPF do usuário
-        (
-            balance_value,
-            deposit_in_day_number,
-            transactions_in_day_number,
-            transactions_history,
-        ) = deposit_transaction_value(
-            balance_value,
-            deposit_in_day_number,
-            transactions_in_day_number,
-            transactions_per_day_limit,
-            transactions_history,
-            user_cpf,  # Passando CPF do usuário
-        )
+        user_cpf = input("Informe seu CPF: ")
+        if validate_cpf(user_cpf):
+            deposit_transaction(users, user_cpf, accounts)
+        else:
+            print("CPF inválido!")
     elif option == 6:
-        user_cpf = input("Informe seu CPF: ")  # Adicionando captura do CPF do usuário
-        (
-            balance_value,
-            withdrawal_transaction_in_day_number,
-            transactions_in_day_number,
-            transactions_history,
-        ) = withdrawal_transaction_value(
-            balance_value,
-            withdrawal_transaction_per_day_limit_number,
-            withdrawal_transaction_in_day_number,
-            withdrawal_per_operation_limit_value,
-            transactions_in_day_number,
-            transactions_history,
-            user_cpf,  # Passando CPF do usuário
-        )
+        user_cpf = input("Informe seu CPF: ")
+        if validate_cpf(user_cpf):
+            withdrawal_transaction(users, user_cpf, accounts)
+        else:
+            print("CPF inválido!")
     elif option == 7:
-        show_transaction_history(
-            balance_value,
-            withdrawal_transaction_in_day_number,
-            withdrawal_transaction_per_day_limit_number,
-            deposit_in_day_number,
-            transactions_in_day_number,
-            transactions_history,
-            user_cpf,
-        )
+        user_cpf = input("Informe seu CPF: ")
+        if validate_cpf(user_cpf):
+            show_transaction_history(
+                user_cpf,
+            )
+        else:
+            print("CPF inválido!")
     elif option == 8:
         print("Operação cancelada.")
-    else:
-        print("Opção inválida! Tente novamente.")
