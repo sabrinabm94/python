@@ -5,15 +5,19 @@ withdrawal_transaction_per_day_limit_number = 3
 transactions_per_day_limit = 10
 transactions_in_day_number = 0
 withdrawal_transaction_in_day_number = 0
-deposite_in_day_number = 0
+deposit_in_day_number = 0
 withdrawal_per_operation_limit_value = 500.00
 option = -1
 transactions_history = ""
+users = []
+accounts = []
+account_agency = str("0001")
+account_number_prefix = 0
 
 
-def deposite_transaction_value(
+def deposit_transaction_value(
     balance_value,
-    deposite_in_day_number,
+    deposit_in_day_number,
     transactions_in_day_number,
     transactions_per_day_limit,
     transactions_history,
@@ -25,21 +29,21 @@ def deposite_transaction_value(
         transaction_date_time, transactions_per_day_limit, transactions_in_day_number
     )
     if is_transaction_allowed is True:
-        deposite_transaction_value = float(input("Informe o valor de depósito:"))
-        if deposite_transaction_value > 0:
-            balance_value += deposite_transaction_value
-            deposite_in_day_number += 1
+        deposit_transaction_value = float(input("Informe o valor de depósito:"))
+        if deposit_transaction_value > 0:
+            balance_value += deposit_transaction_value
+            deposit_in_day_number += 1
             transactions_in_day_number += 1
             transactions_history = update_transactions_history(
                 transactions_history,
                 transaction_date_time,
-                deposite_transaction_value,
+                deposit_transaction_value,
                 "depositado",
             )
             show_transaction_confirmation_message(
-                deposite_transaction_value, "depositado"
+                deposit_transaction_value, "depositado"
             )
-            print("Depósitos realizados no dia:", deposite_in_day_number)
+            print("Depósitos realizados no dia:", deposit_in_day_number)
             show_transaction_history_value(balance_value)
 
         else:
@@ -50,7 +54,7 @@ def deposite_transaction_value(
     )
     return (
         balance_value,
-        deposite_in_day_number,
+        deposit_in_day_number,
         transactions_in_day_number,
         transactions_history,
     )
@@ -70,7 +74,7 @@ def withdrawal_transaction_value(
     is_transaction_allowed = transactions_in_day_limit_verify(
         transaction_date_time, transactions_per_day_limit, transactions_in_day_number
     )
-    is_withdrawal_transaction_allowed = withdrawal_transactios_in_day_limit_verify(
+    is_withdrawal_transaction_allowed = withdrawal_transactions_in_day_limit_verify(
         transaction_date_time,
         withdrawal_transaction_per_day_limit_number,
         withdrawal_transaction_in_day_number,
@@ -79,7 +83,6 @@ def withdrawal_transaction_value(
         if is_withdrawal_transaction_allowed is True:
             withdrawal_transaction_value = float(input("Informe o valor de saque:"))
             is_withdrawal_transaction_value_valid = withdrawal_value_verify(
-                transaction_date_time,
                 withdrawal_transaction_value,
                 withdrawal_per_operation_limit_value,
                 balance_value,
@@ -124,7 +127,7 @@ def show_transaction_history(
     balance_value,
     withdrawal_transaction_in_day_number,
     withdrawal_transaction_per_day_limit_number,
-    deposite_in_day_number,
+    deposit_in_day_number,
     /,
     transactions_in_day_number,
     transactions_history,
@@ -139,7 +142,7 @@ def show_transaction_history(
             withdrawal_transaction_in_day_number,
             withdrawal_transaction_per_day_limit_number,
         )
-        show_deposite_transactions_in_day_number(deposite_in_day_number)
+        show_deposit_transactions_in_day_number(deposit_in_day_number)
         print(f"\nHistórico de transações: {transactions_history} \n")
 
     show_transactions_in_day_number(
@@ -151,10 +154,14 @@ def show_transaction_history(
 def show_menu():
     return """\n\nSeja bem vindo!
     Selecione uma opção para continuar:
-            [1] Depósito
-            [2] Saque
-            [3] Extrato
-            [4] Cancelar
+            [1] Cadastrar usuário
+            [2] Listar usuários
+            [3] Cadastrar conta bancária
+            [4] Listar contas bancárias
+            [5] Depósito
+            [6] Saque
+            [7] Extrato
+            [8] Cancelar
     \n\n
     """
 
@@ -174,13 +181,13 @@ def show_withdrawal_transactions_in_day_number(
         print("Não foram realizados saques no dia de hoje")
 
 
-def show_deposite_transactions_in_day_number(deposite_in_day_number):
-    if deposite_in_day_number > 0:
-        print("Depósitos realizados no dia:", deposite_in_day_number)
+def show_deposit_transactions_in_day_number(deposit_in_day_number):
+    if deposit_in_day_number > 0:
+        print("Depósitos realizados no dia:", deposit_in_day_number)
     else:
         print("Não foram realizados depósitos no dia de hoje")
 
-    return deposite_in_day_number
+    return deposit_in_day_number
 
 
 def show_transactions_in_day_number(
@@ -214,32 +221,21 @@ def show_date_now(date_time_now):
 
 
 def withdrawal_value_verify(
-    transaction_date_time,
     withdrawal_transaction_value,
     withdrawal_per_operation_limit_value,
     balance_value,
 ):
     if (
-        withdrawal_transactios_in_day_limit_verify(
-            transaction_date_time,
-            withdrawal_transaction_per_day_limit_number,
-            withdrawal_transaction_in_day_number,
-        )
-        is True
+        withdrawal_transaction_value > 0
+        and withdrawal_transaction_value <= balance_value
+        and withdrawal_transaction_value <= withdrawal_per_operation_limit_value
     ):
-        if (
-            withdrawal_transaction_value > 0
-            and withdrawal_transaction_value <= balance_value
-            and withdrawal_transaction_value <= withdrawal_per_operation_limit_value
-        ):
-            return True
-        else:
-            return False
+        return True
     else:
         return False
 
 
-def withdrawal_transactios_in_day_limit_verify(
+def withdrawal_transactions_in_day_limit_verify(
     transaction_date_time,
     withdrawal_transaction_per_day_limit_number,
     withdrawal_transaction_in_day_number,
@@ -297,24 +293,117 @@ def show_transaction_confirmation_message(transaction_value, transaction_type_na
     )
 
 
-while option != 5:
-    option = int(input(show_menu()))
+def user_registry(users):
+    print("\nOpção REGISTRO de usuários selecionada...")
 
+    user_name = str(input("Informe o nome:"))
+    user_birtdate = str(input("Informe a data de nascimento:"))
+    user_cpf = int(input("Informe o CPF - números:"))
+    user_street = str(input("Informe a rua:"))
+    user_street_number = str(input("Informe o número:"))
+    user_neighborhood = str(input("Informe o bairro:"))
+    user_city = str(input("Informe a cidade:"))
+    user_state = str(input("Informe o estado - sigla:"))
+
+    if user_verify_cpf(users, user_cpf) is True:
+        users.append(
+            dict(
+                name=user_name,
+                birtdate=user_birtdate,
+                cpf=user_cpf,
+                adress=f"{user_street}, {user_street_number} - {user_neighborhood} - {user_city}/{user_state}",
+            )
+        )
+
+        print("Usuário cadastrado com sucesso!")
+
+    return users
+
+
+def users_list(users):
+    print("\nOpção LISTAGEM de usuários selecionada...")
+
+    for user in users:
+        print(user)
+
+
+def user_verify_cpf(users, cpf):
+    if cpf not in [user["cpf"] for user in users]:
+        return True
+    else:
+        print("CPF já cadastrado.")
+        return False
+
+
+def account_registry(users, accounts, account_agency, account_number_prefix):
+    print("\nOpção REGISTRO de contas selecionada...")
+
+    account_number = str(input("Informe o número da conta:"))
+    account_user_cpf = int(input("Informe o CPF - números do titular:"))
+
+    if new_account_only_one_user_verify(users, account_user_cpf) is True:
+        account_number_prefix += 1
+
+        accounts.append(
+            dict(
+                agency=account_agency,
+                number=str(account_number_prefix + account_number),
+                user_cpf=account_user_cpf,
+            )
+        )
+
+        print("Conta cadastrada com sucesso!")
+
+        return accounts, account_number_prefix
+
+
+def account_list(accounts):
+    print("\nOpção LISTAGEM de contas selecionada...")
+
+    for account in accounts:
+        print(account)
+
+
+def new_account_only_one_user_verify(users, cpf):
+    # Uma conta pode ter somente um usuário
+    if cpf in users is True:
+        return True
+    else:
+        print("CPF não cadastrado.")
+        return False
+
+
+while option != 9:
+    option = int(input(show_menu()))
     if option == 1:
+        users = user_registry(users)
+
+    if option == 2:
+        users_list(users)
+
+    if option == 3:
+        accounts, account_number_prefix = account_registry(
+            users, accounts, account_agency, account_number_prefix
+        )
+
+    if option == 4:
+        account_list(accounts)
+
+    if option == 5:
         (
             balance_value,
-            deposite_in_day_number,
+            deposit_in_day_number,
             transactions_in_day_number,
             transactions_history,
-        ) = deposite_transaction_value(
+        ) = deposit_transaction_value(
             balance_value,
-            deposite_in_day_number,
+            deposit_in_day_number,
             transactions_in_day_number,
             transactions_per_day_limit,
             transactions_history,
         )
         # passagem de argumentos por posição
-    if option == 2:
+    if option == 6:
         (
             balance_value,
             withdrawal_transaction_in_day_number,
@@ -329,17 +418,17 @@ while option != 5:
             transactions_history=transactions_history,
         )
         # passagem de argumentos por palavra chave
-    if option == 3:
+    if option == 7:
         show_transaction_history(
             balance_value,
             withdrawal_transaction_in_day_number,
             withdrawal_transaction_per_day_limit_number,
-            deposite_in_day_number,
+            deposit_in_day_number,
             transactions_in_day_number=transactions_in_day_number,
             transactions_history=transactions_history,
         )
         # passagem de argumentos por palavra chave e posição
-    if option == 4:
+    if option == 8:
         print("Opção CANCELAR selecionada, cancelando...")
         print("Obrigada por usar o nosso sistema.\n")
         break

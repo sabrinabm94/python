@@ -43,3 +43,9 @@ print("\nMostrando a hora de Oslo agora: ", date_time_from_oslo.time())
 date_time_from_sao_paulo = datetime.now((timezone(timedelta(hours=-3))))
 # UTC-3 hora de sp br
 print("Mostrando a hora de São Paulo agora: ", date_time_from_sao_paulo.time())
+
+date_with_timezone = datetime(2023, 1, 1, tzinfo=timezone.utc)
+print("Mostrando data aware: ", date_with_timezone)
+
+date_without_timezone = datetime(2023, 1, 1, tzinfo=None)
+print("Mostrando data naive: ", date_without_timezone)
