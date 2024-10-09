@@ -28,14 +28,14 @@ class Client(Person):
 
     @classmethod
     def transaction(cls, account_number, transaction):
-        account = get_account_by_number(account_number)
+        account = cls.get_account_by_number(account_number)
         if account:
             account.historic.add_transaction(account, transaction)
             return account
         return None
 
     def show_transactions(cls, account_number):
-        account = get_account_by_number(account_number)
+        account = cls.get_account_by_number(account_number)
         if account:
             return account.historic.show_transactions(account)
         return None
@@ -67,36 +67,43 @@ class Account(Transaction):
         self.client: Client = client
         self.historic: Historic = Historic(self)
         self.withdrawal_value_limit: float = 500  # limitador de valor por saque
-        self.withdrawal_limit_day: int = 3  # limitador de quantidade de saques diários
+        self.withdrawal_daily_limit: int = (
+            3  # limitador de quantidade de saques diários
+        )
         self.withdrawal_today: int = 0  # Contador de quantidade de saques diários
         self.transactions_today: int = 0  # Contador de quantidade de transações diárias
         self.transactions_daily_limit: int = 10  # limitador de transações diárias
+        self.last_transaction_date: date = date.today()  # Data da última transação
 
-    def register_account(self, cpf_user, account_number):
-        pass
+    def check_daily_limits(self):
+        """Verifica se é um novo dia e reseta os limites se necessário."""
+        today = date.today()
+        if today != self.last_transaction_date:
+            self.withdrawal_today = 0
+            self.transactions_today = 0
+            self.last_transaction_date = today
 
     def withdrawal(self, value: float):
+        # Verifica e reseta os limites se for um novo dia
+        self.check_daily_limits()
+
         # Validações de limites para operação
-        # limite de saque
-        if self.withdrawal_today >= self.withdrawal_limit_day:
+        if self.withdrawal_today >= self.withdrawal_daily_limit:
             return print(
-                f"Limite diário de saques de {self.withdrawal_limit_day} já foi alcançado!"
+                f"Limite diário de saques de {self.withdrawal_daily_limit} já foi alcançado!"
             )
 
-        # limite de transações
         if self.transactions_today >= self.transactions_daily_limit:
             return print(
                 f"Limite de {self.transactions_daily_limit} transações diárias alcançado!"
             )
 
         # Validação de valores para operação
-        # validação de valor limite de saque
         if value > self.withdrawal_value_limit:
             return print(
                 f"Valor de {value} é maior que o limite de {self.withdrawal_value_limit} permitido para operação!"
             )
 
-        # validação de valor da operação
         if value > 0 and value <= self.balance:
             self.balance -= value
             self.withdrawal_today += 1
@@ -111,13 +118,16 @@ class Account(Transaction):
             return print(f"Valor informado de {value} inválido!")
 
     def deposit(self, value: float):
-        # limite de transações
+        # Verifica e reseta os limites se for um novo dia
+        self.check_daily_limits()
+
+        # Validações de limites para operação
         if self.transactions_today >= self.transactions_daily_limit:
             return print(
                 f"Limite de {self.transactions_daily_limit} transações diárias alcançado!"
             )
 
-        # validação de valor da operação
+        # Validação de valores para operação
         if value > 0:
             self.balance += value
             self.transactions_today += 1
@@ -128,6 +138,9 @@ class Account(Transaction):
             return self.show_balance()
         else:
             return print(f"Valor informado de {value} inválido!")
+
+    def register_account(self, cpf_user, account_number):
+        pass
 
     def show_balance(self):
         return self.balance
@@ -141,7 +154,7 @@ class Account(Transaction):
         print(f"Histórico de transações:")
         self.historic.show_transactions()
         print(
-            f"Limites diários: Transações {self.transactions_today} | Saques {self.withdrawal_today}/{self.withdrawal_limit_day}"
+            f"Limites diários: Transações {self.transactions_today} | Saques {self.withdrawal_today}/{self.withdrawal_daily_limit}"
         )
         print("########################################\n")
 
@@ -260,7 +273,7 @@ class BankSystem:
                 print(f"Histórico de transações:")
                 account.historic.show_transactions()
                 print(
-                    f"Limites diários: Transações {account.transactions_today} | Saques {account.withdrawal_today}/{account.withdrawal_limit_day}"
+                    f"Limites diários: Transações {account.transactions_today} | Saques {account.withdrawal_today}/{account.withdrawal_daily_limit}"
                 )
                 print("########################################\n")
         else:
@@ -296,8 +309,7 @@ def main():
             print("\n")
         elif option == 3:  # registrar conta
             cpf = input("CPF do cliente (somente números): ")
-            account_number = input("Número da conta (somente números): ")
-            bank_system.register_account(account_number)
+            bank_system.register_account(cpf)
             print("\n")
         elif option == 4:  # listar contas
             cpf = input("CPF do cliente (somente números): ")
