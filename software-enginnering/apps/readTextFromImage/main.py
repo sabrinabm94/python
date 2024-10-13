@@ -1,2 +1,0 @@
-import processAndPrepareImageToDetection
-import identifyTextInImage
