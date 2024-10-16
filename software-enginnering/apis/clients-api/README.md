@@ -1,107 +1,59 @@
-# Clients API
+## Clients API
 
-## Description
+### Description
 
-This REST API was created using Flask and is used for managing client information.
+This REST API was created using **Flask** for managing client information.
 
-## Requirements
+### Installation
 
-### Create a Virtual Environment
+Steps to set up the project locally:
 
-```bash
-python -m venv env
+1. Clone the repository
+2. Create a virtual environment:
 
-# For Linux
-source env/bin/activate
+   ```bash
+   python -m venv env
+   ```
 
-# For Windows
-env\Scripts\activate
-```
+3. Activate the environment:
+   - For Linux: `source env/bin/activate`
+   - For Windows: `env\Scripts\activate`
+4. Install dependencies:
 
-### Install Packages
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-#### One by One
+### Usage
 
-```bash
-pip install Flask flask-pymongo bson flasgger requests jsonlib-python3 werkzeug
-```
-
-#### Using the Requirements File
-
-Create a `requirements.txt` file with the following content and install all packages at once:
-
-```
-Flask
-flask-pymongo
-bson
-flasgger
-requests
-jsonlib-python3
-werkzeug
-```
-
-Then, run:
-
-```bash
-pip install -r requirements.txt
-```
-
-### Verify Installed Packages
-
-```bash
-pip freeze
-```
-
-### Uninstall Packages
-
-```bash
-pip uninstall Flask
-```
-
-### Upgrade Packages
-
-To upgrade Flask to a specific version:
-
-```bash
-pip install --upgrade Flask==2.0.2
-```
-
-## Running the Application
-
-1. **Run the Python Script**
-
-   Execute the main Python script to start the Flask server:
+1. Run the Flask server:
 
    ```bash
    python main.py
    ```
 
-   This will start the Flask application on `http://localhost:8080`.
-
-2. **View the Client Listing**
-
-   Open your web browser and navigate to:
+2. Access the client listing:
 
    ```
    http://localhost:8080/api/v1.0/clients
    ```
 
-   This URL will display the list of clients in JSON format.
-
-## Testing
-
 ### Requirements
 
-To test the requests, install [Insomnia](https://insomnia.rest/download).
+- Flask
+- Flask-PyMongo
+- bson
+- flasgger
+- requests
+- jsonlib-python3
+- werkzeug
 
-### Usage
+### Testing
 
-Import the `Insomnia-requests-api-clients.json` file into Insomnia and test the available requests.
+- Install [Insomnia](https://insomnia.rest/download) for API testing.
+- Import `Insomnia-requests-api-clients.json` for testing the API requests.
 
----
+### Author
 
-# Contact
-
-Sabrina B.
-See my profile [here](https://github.com/sabrinabm94/about/blob/main/README.md)
-<sabrinabm94@gmail.com>
+Maintained by [Sabrina B.](https://github.com/sabrinabm94/about/blob/main/README.md).
+Feel free to reach out at <sabrinabm94@gmail.com>.

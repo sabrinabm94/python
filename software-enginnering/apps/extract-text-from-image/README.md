@@ -1,73 +1,61 @@
-# README
+Aqui está o modelo aplicado e ajustado ao seu segundo README:
 
-## Description
+---
 
-This Python script uses the **PIL** (Pillow) library and **Tesseract OCR** to extract text from images and save it into text files (.txt). After extraction, the generated text file is opened automatically.
+## Python OCR Text Extraction
 
-## Dependencies
+### Description
 
-### 1. Python
+This Python script uses **Pillow** and **Tesseract OCR** to extract text from images and save it into `.txt` files. After extraction, the text file is opened automatically.
 
-Make sure you have Python installed. You can install the necessary dependencies using the `pip` package manager. Run the following commands in your terminal or command prompt:
+### Installation
 
-```bash
-pip install pillow
-pip install pytesseract
-pip install opencv-python
-```
+Steps to set up the project locally:
 
-### 2. Required Software
-
-To ensure the project works properly, you will need **Tesseract OCR**. Follow the steps below:
-
-1. **Download and Install Tesseract**:
-   - Go to the Tesseract download page: [Download Tesseract](https://sourceforge.net/projects/tesseract-ocr-alt/files/).
-
-2. **Configure the Tesseract Path**:
-   - After installation, locate the path where Tesseract was installed.
-   - Update the script to include the path to the Tesseract executable, as exemplified below:
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
+3. Install Tesseract OCR and configure the path:
+   - [Download Tesseract](https://sourceforge.net/projects/tesseract-ocr-alt/files/)
+   - Update the script with your Tesseract path:
 
      ```python
      pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
      ```
 
-## How to Use
+### Usage
 
-1. **Prepare Images**:
-   - Make sure the images from which you want to extract text are in the same directory as the script, or provide the full path.
+1. Modify the `image_paths` list with the image names:
 
-2. **Modify the Script**:
-   - Edit the `image_paths` list to include the names of the images you want to process. For example:
+   ```python
+   image_paths = ["1.jpeg", "2.png"]
+   ```
 
-     ```python
-     image_paths = [
-         "1.jpeg",
-         "2.png",
-     ]
-     ```
+2. Run the script:
 
-3. **Run the Script**:
-   - Execute the script in your Python environment:
+   ```bash
+   python your_script.py
+   ```
 
-     ```bash
-     python your_script.py
-     ```
+3. Text will be extracted and saved as `.txt` files in the same directory.
 
-4. **Results**:
-   - The extracted text will be saved in `.txt` files in the same directory as the images. After extraction, each text file will be opened automatically.
+### Main Functions
 
-## Main Functions
+- `extract_text_from_image(image_path)`: Extracts text from an image.
+- `save_text_to_file(text, image_path)`: Saves and opens the extracted text file.
 
-- `extract_text_from_image(image_path)`: Extracts text from a specified image.
-- `save_text_to_file(text, image_path)`: Saves the extracted text in a `.txt` file and opens it automatically.
+### Requirements
 
-## Notes
+- Python
+- Pillow
+- Tesseract OCR
+- `opencv-python`
+- VS Code extensions: `Pylance`, `Python Debugger`, `PyLint`, `Ruff`
 
-- Ensure that Tesseract is installed correctly and that the path is configured in the script.
-- The script is optimized to run in Windows environments. For other operating systems, you may need to modify the line that opens the text file.
+### Notes
 
-## Author
+- Tesseract must be properly installed, and the script is set up for Windows. Adjustments may be needed for other systems.
 
-Sabrina B.
-See my profile [here](https://github.com/sabrinabm94/about/blob/main/README.md)
-<sabrinabm94@gmail.com>
+### Author
+
+Maintained by [Sabrina B.](https://github.com/sabrinabm94/about/blob/main/README.md).
+Feel free to reach out at <sabrinabm94@gmail.com>.

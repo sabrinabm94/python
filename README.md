@@ -1,35 +1,41 @@
-# Repository structure
+## Python
 
-## Basic
+### Description
 
-Scripts for testing Python features and sintax.
+A repository to Python studies.
 
-## Object Oriented
+### Installation
 
-Scripts using the object-oriented pattern for designing projects.
+Steps to set up the project locally:
 
-## Apis
+1. Clone the repository
+2. Install dependencies: `pip install -r requirements.txt`
 
-Apis projects that provides and consumes data.
+### Usage
 
-# Requisits
+Instructions and examples on how to run the scripts:
 
-- Pylance
-- Python Debugger
-- PyLint
-- Ruff
+```bash
+python script_name.py
+```
 
-## Must have
+### Folder Structure
 
-- Markdownlint
-- TODO Highlight
-- Sublime text keymap
-- EditorConfig
+- `/data-engineering`: Scripts related to data engineering, like ETL processes and data manipulation.
+- `/software-engineering`: Code examples showcasing software engineering principles.
 
----
+### Requirements
 
-# Contact
+List of required tools and libraries:
 
-Sabrina B.
-See my profile [here](https://github.com/sabrinabm94/about/blob/main/README.md)
-<sabrinabm94@gmail.com>
+- Python
+- VS Code extensions: `Pylance`, `Python Debugger`, `PyLint`, `Ruff`
+
+### Contributing
+
+Guidelines for contributing to the project.
+
+### Author
+
+Maintained by [Sabrina B.](https://github.com/sabrinabm94/about/blob/main/README.md).
+Feel free to reach out at <sabrinabm94@gmail.com>.
