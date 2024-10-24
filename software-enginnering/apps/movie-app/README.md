@@ -29,6 +29,8 @@ python movie_app.py
 
 ### Requirements
 
+Command instalation `pip install -r requirements.txt`
+
 - Python
 - OMDB API
 

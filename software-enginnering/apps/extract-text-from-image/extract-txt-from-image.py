@@ -7,9 +7,12 @@ pytesseract.pytesseract.tesseract_cmd = (
     r"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe"
 )
 
-# Indique o diretório e nome da imagem que deseja extrair o texto
+# Obtém o diretório onde o script está localizado
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construa o caminho completo da imagem
 image_paths = [
-    "1.jpeg",
+    os.path.join(script_dir, "1.jpeg"),
 ]
 
 

@@ -1,7 +1,3 @@
-Aqui está o modelo aplicado e ajustado ao seu segundo README:
-
----
-
 ## Python OCR Text Extraction
 
 ### Description
@@ -44,6 +40,8 @@ Steps to set up the project locally:
 - `save_text_to_file(text, image_path)`: Saves and opens the extracted text file.
 
 ### Requirements
+
+Command instalation `pip install -r requirements.txt`
 
 - Python
 - Pillow

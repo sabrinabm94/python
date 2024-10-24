@@ -31,6 +31,8 @@ Enter a city name and choose whether to view full details or specific weather in
 
 ### Requirements
 
+Command instalation `pip install -r requirements.txt`
+
 - Python
 - API key from OpenWeatherMap
 

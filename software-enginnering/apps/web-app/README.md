@@ -31,6 +31,8 @@ You can either use the default URL or provide a custom one.
 
 ### Requirements
 
+Command instalation `pip install -r requirements.txt`
+
 - Python
 - `requests` library
 

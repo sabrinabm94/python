@@ -45,6 +45,8 @@ Steps to set up the project locally:
 
 ### Requirements
 
+Command instalation `pip install -r requirements.txt`
+
 - Flask
 - json
 
