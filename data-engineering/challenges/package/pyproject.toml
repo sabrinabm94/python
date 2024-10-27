@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "read_text_from_image_with_python"
+version = "0.0.1"
+authors = [
+  { name = "Sabrina B. M.", email = "sabrinabm94@gmail.com" }
+]
+description = "Package to extract text from images using Python"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT License" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent"
+]
+
+dependencies = [
+    "pillow",
+    "pytesseract"
+]
+
+[project.urls]
+Homepage = "https://github.com/sabrinabm94/python/tree/master/data-engineering/challenges/package"
+Issues = "https://github.com/sabrinabm94/python/tree/master/data-engineering/challenges/package/issues"
+
+[tool.pypi]
+repository = "https://upload.pypi.org/legacy/"
+username = "sabrinabm94"
