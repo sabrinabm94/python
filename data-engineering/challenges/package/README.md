@@ -6,6 +6,8 @@ Este pacote Python utiliza **Pillow** e **Tesseract OCR** para extrair texto de 
 
 ### Installation
 
+Pode ser instalado o pacote publicado em: <https://pypi.org/project/read-text-from-image-with-python/>
+ou seguindo os passos baixo para rodar o compilado:
 Passos para configurar o projeto localmente:
 
 1. Clone o repositório.
