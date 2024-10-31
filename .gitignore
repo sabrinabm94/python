@@ -9,4 +9,4 @@ env/Lib/*
 env/*
 python/
 env/
-read_text_from_image_with_python.egg-info
+*-info

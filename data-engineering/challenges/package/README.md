@@ -1,71 +1,67 @@
-## Python OCR Text Extraction Package
+# Data Engineering Challenges Package
 
-### Description
+Este pacote Python utiliza Pillow e Tesseract OCR para extrair texto de imagens e salvar o conteúdo em arquivos .txt. Após a extração, o arquivo de texto é aberto automaticamente para visualização.
 
-Este pacote Python utiliza **Pillow** e **Tesseract OCR** para extrair texto de imagens e salvar o conteúdo em arquivos `.txt`. Após a extração, o arquivo de texto é aberto automaticamente para visualização.
+## Instalação
 
-### Installation
-
-Pode ser instalado o pacote publicado em: <https://pypi.org/project/read-text-from-image-with-python/>
-ou seguindo os passos baixo para rodar o compilado:
-Passos para configurar o projeto localmente:
-
-1. Clone o repositório.
-2. Instale as dependências com o comando:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Instale o Tesseract OCR e configure o caminho:
-   - [Baixar Tesseract](https://sourceforge.net/projects/tesseract-ocr-alt/files/)
-   - Atualize o caminho para o Tesseract no script:
-
-     ```python
-     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-     ```
-
-### Package Modules
-
-O pacote está dividido em três módulos principais:
-
-1. **extract_text_from_image** (`data-engineering/challenges/package/extract_text_from_image/__init__.py`):
-   - Função `extract_text_from_image(image)`: Extrai o texto de uma imagem fornecida. Retorna o texto extraído ou `None` se não for possível realizar a extração.
-
-2. **generate_file** (`data-engineering/challenges/package/generate_file/__init__.py`):
-   - Função `save_text_to_file(text, image_path)`: Salva o texto extraído em um arquivo `.txt`, cujo nome é baseado no nome da imagem original, e abre o arquivo automaticamente para visualização.
-
-3. **processing_image** (`data-engineering/challenges/package/processing_image/__init__.py`):
-   - Função `process_image(image_path)`: Processa uma imagem a partir de um diretório e a prepara para a extração de texto. Retorna o objeto da imagem se for processado com sucesso, ou `None` se o arquivo de imagem não for encontrado.
-
-### Usage
-
-1. Substitua `image_paths` pela lista de imagens desejada:
-
-   ```python
-   image_paths = ["1.jpeg", "2.png"]
-   ```
-
-2. Execute o script principal para extrair e salvar o texto:
-
-   ```bash
-   python your_script.py
-   ```
-
-3. O texto extraído será salvo como arquivos `.txt` no mesmo diretório da imagem.
-
-### Requirements
-
-Instale os requisitos com o comando:
+Adicione o pacote utilizando o comando abaixo
 
 ```bash
-pip install -r requirements.txt
+pip install read-text-from-image-with-python
 ```
 
-- Python
-- Pillow
-- Tesseract OCR
-- `opencv-python` (se necessário para manipulação de imagens)
+Disponibilizado via [pypi](https://pypi.org/project/read-text-from-image-with-python/).
+
+## Uso
+
+### Módulos Disponíveis
+
+Cada módulo oferece funcionalidades específicas para processamento de imagem e texto:
+
+1. **extract_text_from_image**
+   **Função `extract_text_from_image(image)`**: Extrai o texto de uma imagem fornecida. Retorna o texto extraído ou None se não for possível realizar a extração.
+
+2. **generate_file**
+   **Função `save_text_to_file(text, image_path`**: Salva o texto extraído em um arquivo .txt, cujo nome é baseado no nome da imagem original, e abre o arquivo automaticamente para visualização.
+
+3. **processing_image**
+   **Função `process_image(image_path)`**: Processa uma imagem a partir de um diretório e a prepara para a extração de texto. Retorna o objeto da imagem se for processado com sucesso, ou None se o arquivo de imagem não for encontrado.
+
+### Exemplo de uso
+
+```python
+import os
+import extract_text_from_image
+import processing_image
+import generate_file
+
+
+def main(image_name, image_path):
+    image_paths = [
+        os.path.join(image_path, image_name),
+    ]
+
+    # Extraindo texto das imagens e salvando em arquivos .txt
+    for image_path in image_paths:
+        image = processing_image.process_image(image_path)
+
+        if image:
+            extracted_text = extract_text_from_image.extract_text_from_image(image_path)
+
+            if extracted_text:
+                generate_file.save_text_to_file(extracted_text, image_path)
+
+
+# Preencher com as info da sua imagem
+image_name = "image.png"
+image_path = os.path.dirname(os.path.abspath(__file__))
+
+if __name__ == "__main__":
+    main(image_name, image_path)
+
+```
+
+---
 
 ### Notes
 

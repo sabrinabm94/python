@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "read_text_from_image_with_python"
-version = "0.0.1"
+version = "0.0.4"
 authors = [
   { name = "Sabrina B. M.", email = "sabrinabm94@gmail.com" }
 ]
